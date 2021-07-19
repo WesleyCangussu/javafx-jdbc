@@ -1,9 +1,12 @@
 package gui;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,8 +15,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.entities.Departamento;
+import model.services.DepartamentoService;
 
 public class DepartamentoController implements Initializable {
+	
+	private DepartamentoService service;
 
 	@FXML
 	private Button btNovo;
@@ -24,6 +30,7 @@ public class DepartamentoController implements Initializable {
 	@FXML
 	private TableColumn<Departamento, String> tableColumnNome;
 	
+	private ObservableList<Departamento> obsList;
 	
 	@FXML
 	public void onBtNovoAction() {
@@ -37,7 +44,9 @@ public class DepartamentoController implements Initializable {
 		initializeNodes();
 	}
 
-
+	public void SetDepartamentoService(DepartamentoService service) {
+		this.service = service;
+	}
 
 	private void initializeNodes() {
 
@@ -46,6 +55,15 @@ public class DepartamentoController implements Initializable {
 		
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewDepartamento.prefHeightProperty().bind(stage.heightProperty());
+	}
+	
+	public void UpdateTableView() {
+		if (service == null) {
+			throw new IllegalStateException("Service está nulo");
+		}
+		List<Departamento> list = service.findAll();
+		obsList = FXCollections.observableList(list);
+		tableViewDepartamento.setItems(obsList);
 	}
 
 }
