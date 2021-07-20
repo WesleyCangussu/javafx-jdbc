@@ -16,14 +16,14 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
-import model.services.DepartamentoService;
+import model.services.DepartmentService;
 
 public class ViewController implements Initializable {
 
 	@FXML
 	private MenuItem menuItemVendedor;
 	@FXML
-	private MenuItem menuItemDepartamento;
+	private MenuItem menuItemDepartment;
 	@FXML
 	private MenuItem menuItemSobre;
 
@@ -33,9 +33,9 @@ public class ViewController implements Initializable {
 	}
 
 	@FXML
-	public void onMenuItemDepartamentoAction() {
-		loadView("/gui/DepartamentoList.fxml", (DepartamentoController controller) -> {
-			controller.SetDepartamentoService(new DepartamentoService());
+	public void onMenuItemDepartmentAction() {
+		loadView("/gui/DepartmentList.fxml", (DepartmentController controller) -> {
+			controller.SetDepartmentService(new DepartmentService());
 			controller.UpdateTableView();
 		});
 	}

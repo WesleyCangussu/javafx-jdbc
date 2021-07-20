@@ -14,23 +14,23 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.entities.Departamento;
-import model.services.DepartamentoService;
+import model.entities.Department;
+import model.services.DepartmentService;
 
-public class DepartamentoController implements Initializable {
+public class DepartmentController implements Initializable {
 	
-	private DepartamentoService service;
+	private DepartmentService service;
 
 	@FXML
 	private Button btNovo;
 	@FXML
-	private TableView<Departamento> tableViewDepartamento;
+	private TableView<Department> tableViewDepartment;
 	@FXML
-	private TableColumn<Departamento, Integer> tableColumnId;
+	private TableColumn<Department, Integer> tableColumnId;
 	@FXML
-	private TableColumn<Departamento, String> tableColumnNome;
+	private TableColumn<Department, String> tableColumnNome;
 	
-	private ObservableList<Departamento> obsList;
+	private ObservableList<Department> obsList;
 	
 	@FXML
 	public void onBtNovoAction() {
@@ -44,26 +44,26 @@ public class DepartamentoController implements Initializable {
 		initializeNodes();
 	}
 
-	public void SetDepartamentoService(DepartamentoService service) {
+	public void SetDepartmentService(DepartmentService service) {
 		this.service = service;
 	}
 
 	private void initializeNodes() {
 
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
-		tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("name"));
 		
 		Stage stage = (Stage) Main.getMainScene().getWindow();
-		tableViewDepartamento.prefHeightProperty().bind(stage.heightProperty());
+		tableViewDepartment.prefHeightProperty().bind(stage.heightProperty());
 	}
 	
 	public void UpdateTableView() {
 		if (service == null) {
 			throw new IllegalStateException("Service está nulo");
 		}
-		List<Departamento> list = service.findAll();
+		List<Department> list = service.findAll();
 		obsList = FXCollections.observableList(list);
-		tableViewDepartamento.setItems(obsList);
+		tableViewDepartment.setItems(obsList);
 	}
 
 }
