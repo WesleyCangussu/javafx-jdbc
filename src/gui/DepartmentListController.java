@@ -34,7 +34,7 @@ import javafx.stage.Stage;
 import model.entities.Department;
 import model.services.DepartmentService;
 
-public class DepartmentController implements Initializable, DataChangeListener{
+public class DepartmentListController implements Initializable, DataChangeListener{
 	
 	private DepartmentService service;
 
